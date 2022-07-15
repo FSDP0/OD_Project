@@ -1,16 +1,21 @@
 import { Inject, Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+
 import { FindOneOptions, Repository } from "typeorm";
 import * as bcrypt from "bcrypt";
 
+import config from "../config/env/configuration";
+
 import { User } from "./entity/user.entity";
 
-import { UserDto, CreateUserDto, UpdateUserDto } from "./dto/user.dto";
+import { UserDto, CreateUserDto } from "./dto/user.dto";
 
 @Injectable()
 export class UsersService {
    constructor(
       @Inject("USER_REPOSITORY")
       private userRepository: Repository<User>,
+      private configService: ConfigService,
    ) {}
 
    async findByFields(
@@ -36,7 +41,7 @@ export class UsersService {
    }
 
    private async setPassword(dto: CreateUserDto): Promise<void> {
-      const salt = 10;
+      const salt = this.configService.get<number>("SECRET_SALT");
       dto.userPassword = await bcrypt.hash(dto.userPassword, salt);
 
       return Promise.resolve();
