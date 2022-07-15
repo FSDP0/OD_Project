@@ -4,8 +4,6 @@ import { ConfigService } from "@nestjs/config";
 import { FindOneOptions, Repository } from "typeorm";
 import * as bcrypt from "bcrypt";
 
-import config from "../config/env/configuration";
-
 import { User } from "./entity/user.entity";
 
 import { UserDto, CreateUserDto } from "./dto/user.dto";
@@ -41,7 +39,7 @@ export class UsersService {
    }
 
    private async setPassword(dto: CreateUserDto): Promise<void> {
-      const salt = this.configService.get<number>("SECRET_SALT");
+      const salt = this.configService.get<number>("SALT");
       dto.userPassword = await bcrypt.hash(dto.userPassword, salt);
 
       return Promise.resolve();

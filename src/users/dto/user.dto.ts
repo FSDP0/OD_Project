@@ -1,5 +1,13 @@
 import { PartialType } from "@nestjs/mapped-types";
-import { IsString, IsEmail, IsNotEmpty, MinLength, MaxLength, Matches, IsOptional, IsEmpty } from "class-validator";
+import {
+   IsString,
+   IsEmail,
+   IsNotEmpty,
+   MinLength,
+   MaxLength,
+   Matches,
+   IsOptional,
+} from "class-validator";
 
 export class UserDto {
    readonly userId: string;

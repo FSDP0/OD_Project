@@ -1,7 +1,6 @@
 import { NestFactory } from "@nestjs/core";
 import { Logger, ValidationPipe } from "@nestjs/common";
-
-import config from "./config/env/configuration";
+import { ConfigService } from "@nestjs/config";
 
 import * as dotenv from "dotenv";
 import * as path from "path";
@@ -18,7 +17,10 @@ dotenv.config({
 });
 async function bootstrap() {
    const app = await NestFactory.create(AppModule);
-   const port = config().port;
+
+   const configService = app.get(ConfigService);
+
+   const port = configService.get<number>("SERVER_PORT");
 
    app.use(helmet()).useGlobalPipes(
       new ValidationPipe({
@@ -32,7 +34,7 @@ async function bootstrap() {
 
    Logger.log(`Server Running at ${port}`);
 
-   // Hot Realoder
+   // Hot Relaoder
    if (module.hot) {
       module.hot.accept();
       module.hot.dispose(() => app.close());

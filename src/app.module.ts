@@ -5,7 +5,6 @@ import { ConfigModule } from "@nestjs/config";
 import * as Joi from "joi";
 
 import { LoggerMiddleware } from "./common/middleware/logger.middleware";
-import config from "./config/env/configuration";
 
 import { AuthModule } from "./auth/auth.module";
 
@@ -21,7 +20,6 @@ import { DatabaseModule } from "./config/database/database.module";
          isGlobal: true,
          envFilePath:
             process.env.NODE_ENV === "production" ? ".prod.env" : ".dev.env",
-         load: [config],
          validationSchema: Joi.object({
             NODE_ENV: Joi.string()
                .valid("development", "production")
