@@ -1,4 +1,4 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
 import { FindOneOptions, Repository } from "typeorm";
@@ -29,7 +29,7 @@ export class UsersService {
 
       let year = date.getFullYear();
       let month = ("0" + (date.getMonth() + 1)).slice(-2);
-      let day = ("0" + date.getDay()).slice(-2);
+      let day = ("0" + date.getDate()).slice(-2);
 
       const regDate = year + "-" + month + "-" + day;
 
@@ -39,13 +39,14 @@ export class UsersService {
    }
 
    private async setPassword(dto: CreateUserDto): Promise<void> {
-      const salt = this.configService.get<number>("SALT");
+      const salt = parseInt(this.configService.get("SALT"));
+
       dto.userPassword = await bcrypt.hash(dto.userPassword, salt);
 
       return Promise.resolve();
    }
 
-   async remove(dto: UserDto): Promise<String | undefined> {
+   async deleteUser(dto: UserDto): Promise<String | undefined> {
       await this.userRepository.delete(dto.userId);
 
       return "Delete User Success";

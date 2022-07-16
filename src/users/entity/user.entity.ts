@@ -20,6 +20,12 @@ export class User {
    @Column({ type: "date" })
    regDate: Date;
 
+   @Column({ type: "date", nullable: true, default: null })
+   modDate?: Date;
+
+   @Column({ type: "date", nullable: true, default: null })
+   delDate?: Date;
+
    @Column({ type: "boolean", default: true })
    isActive: boolean;
 }

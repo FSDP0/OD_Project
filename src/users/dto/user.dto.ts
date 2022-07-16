@@ -66,3 +66,5 @@ export class LoginUserDto {
    })
    readonly userPassword: string;
 }
+
+export class DeleteUserDto {}

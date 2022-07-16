@@ -41,5 +41,5 @@ import { UserRepository } from "../users/repo/user.repository";
    ],
 })
 export class AuthModule {
-   constructor(private configService: ConfigService) {}
+   // constructor(private configService: ConfigService) {}
 }
