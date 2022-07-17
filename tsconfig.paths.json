@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@root/*": [
+                "./src/*"
+            ],
+            "@auth/*": [
+                "./src/auth/*"
+            ],
+            "@user/*": [
+                "./src/users/*"
+            ],
+            "@dbConfig/*": [
+                "./src/config/database/*"
+            ],
+            "@middleware/*": [
+                "./src/common/middleware/*"
+            ]
+        }
+    }
+}

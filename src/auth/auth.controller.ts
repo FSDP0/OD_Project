@@ -1,6 +1,7 @@
 import {
-   Post,
    Get,
+   Post,
+   Delete,
    Req,
    Body,
    Controller,
@@ -22,11 +23,10 @@ import { CreateUserDto, LoginUserDto } from "../users/dto/user.dto";
 @Controller("auth")
 export class AuthController {
    constructor(
-      private readonly authService: AuthService, // private readonly usersService: UsersService,
-   ) // private readonly configService: ConfigService,
-   {}
+      private readonly authService: AuthService, // private readonly usersService: UsersService, // private readonly configService: ConfigService,
+   ) {}
 
-   @Post("/Regist")
+   @Post("Regist")
    async createUser(
       @Req() req: Request,
       @Body() dto: CreateUserDto,
@@ -35,7 +35,7 @@ export class AuthController {
    }
 
    @UseGuards(LocalAuthGuard)
-   @Post("/Login")
+   @Post("Login")
    async loginUser(
       @Req() req: Request,
       @Body() dto: LoginUserDto,
@@ -43,39 +43,18 @@ export class AuthController {
       return await this.authService.loginUser(dto);
    }
 
-   @Post("/Update")
+   @Post("Update")
    async UpdateUser(@Req() req: Request) {}
 
    @UseGuards(JwtAuthGuard)
-   @Get("/Profile")
+   @Delete("Delete")
+   async deleteUser(@Req() req: Request): Promise<any> {
+      return await this.authService.deleteUser(req.user.userId);
+   }
+
+   @UseGuards(JwtAuthGuard)
+   @Get("Profile")
    getProfile(@Req() req: Request) {
       return req.user;
    }
-
-   @Get("Test")
-   getReturn(@Req() req: Request) {
-      return {
-         "Request Head": req.headers,
-         // "Request Body": req.body
-      };
-   }
-
-   @Post("Tester")
-   getReturner(@Req() req: Request, @Body() body) {
-      Logger.log(body);
-
-      return {
-         "Request Head": req.headers,
-         "Request Body": req.body,
-      };
-   }
-
-   // @Post("/U_User")
-   // updateUser() {}
-
-   // @Get("/R_User")
-   // userList() {}
-
-   // @Delete("/D_User")
-   // deleteUser() {}
 }

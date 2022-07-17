@@ -40,6 +40,4 @@ import { UserRepository } from "../users/repo/user.repository";
       JwtStrategy,
    ],
 })
-export class AuthModule {
-   // constructor(private configService: ConfigService) {}
-}
+export class AuthModule {}

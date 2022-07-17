@@ -7,8 +7,8 @@ import * as Joi from "joi";
 import { LoggerMiddleware } from "./common/middleware/logger.middleware";
 
 import { AuthModule } from "./auth/auth.module";
-
 import { UsersModule } from "./users/users.module";
+
 import { DatabaseModule } from "./config/database/database.module";
 
 @Module({

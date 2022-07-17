@@ -6,7 +6,7 @@ import * as bcrypt from "bcrypt";
 
 import { User } from "./entity/user.entity";
 
-import { UserDto, CreateUserDto } from "./dto/user.dto";
+import { UserDto, CreateUserDto, UpdateUserDto } from "./dto/user.dto";
 
 @Injectable()
 export class UsersService {
@@ -38,6 +38,10 @@ export class UsersService {
       return await this.userRepository.save(userInfo);
    }
 
+   async updateUser(dto: UpdateUserDto): Promise<UserDto | undefined> {
+      return;
+   }
+
    private async setPassword(dto: CreateUserDto): Promise<void> {
       const salt = parseInt(this.configService.get("SALT"));
 
@@ -46,8 +50,8 @@ export class UsersService {
       return Promise.resolve();
    }
 
-   async deleteUser(dto: UserDto): Promise<String | undefined> {
-      await this.userRepository.delete(dto.userId);
+   async deleteUser(id: string): Promise<String | undefined> {
+      await this.userRepository.delete({ userId: id });
 
       return "Delete User Success";
    }

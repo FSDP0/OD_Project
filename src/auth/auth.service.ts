@@ -76,7 +76,17 @@ export class AuthService {
       return;
    }
 
-   async deleteUser() {}
+   async deleteUser(id: string): Promise<String | undefined> {
+      let userFind = await this.usersService.findByFields({
+         where: { userId: id },
+      });
+
+      if (!userFind) {
+         return "User Not Exist";
+      }
+
+      return this.usersService.deleteUser(id);
+   }
 
    async validateUser(Id: string, Password: string): Promise<any> {
       let userFind: UserDto = await this.usersService.findByFields({

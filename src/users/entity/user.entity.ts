@@ -2,30 +2,48 @@ import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn } from "typeorm";
 
 @Entity()
 export class User {
-   @PrimaryGeneratedColumn({ type: "int" })
+   @PrimaryGeneratedColumn({ type: "int", comment: "사용자 계정 순번" })
    id: number;
 
-   @PrimaryColumn({ type: "varchar" })
+   @PrimaryColumn({ type: "varchar", length: 30, comment: "사용자 아이디" })
    userId: string;
 
-   @Column({ type: "varchar" })
+   @Column({ type: "varchar", length: 100, comment: "사용자 비밀번호" })
    userPassword: string;
 
-   @PrimaryColumn({ type: "varchar" })
+   @PrimaryColumn({
+      type: "varchar",
+      length: 60,
+      comment: "사용자 이메일 주소",
+   })
    userEmail: string;
 
-   @Column({ type: "varchar" })
+   @Column({ type: "varchar", length: 20, comment: "사용자 이름" })
    userName: string;
 
-   @Column({ type: "date" })
+   @Column({ type: "date", comment: "사용자 계정 등록일" })
    regDate: Date;
 
-   @Column({ type: "date", nullable: true, default: null })
+   @Column({
+      type: "date",
+      nullable: true,
+      default: null,
+      comment: "사용자 계정정보 수정일",
+   })
    modDate?: Date;
 
-   @Column({ type: "date", nullable: true, default: null })
+   @Column({
+      type: "date",
+      nullable: true,
+      default: null,
+      comment: "사용자 계정정보 삭제일",
+   })
    delDate?: Date;
 
-   @Column({ type: "boolean", default: true })
+   @Column({
+      type: "boolean",
+      default: true,
+      comment: "사용자 계정 활성화 상태",
+   })
    isActive: boolean;
 }
