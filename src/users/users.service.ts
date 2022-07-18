@@ -19,11 +19,7 @@ export class UsersService {
    async findByFields(
       options: FindOneOptions<UserDto>,
    ): Promise<UserDto | undefined> {
-      const user = await this.userRepository.findOne(options);
-
-      if (!user.isActive) return undefined;
-
-      return user;
+      return await this.userRepository.findOne(options);
    }
 
    async saveUser(dto: CreateUserDto): Promise<UserDto | undefined> {
@@ -67,25 +63,7 @@ export class UsersService {
    }
 
    async deleteUser(id: string): Promise<String | undefined> {
-      let date = new Date();
-
-      let year = date.getFullYear();
-      let month = ("0" + (date.getMonth() + 1)).slice(-2);
-      let day = ("0" + date.getDate()).slice(-2);
-
-      const delDate = year + "-" + month + "-" + day;
-
-      await this.userRepository.update(
-         {
-            userId: id,
-         },
-         {
-            delDate: delDate,
-            isActive: false,
-         },
-      );
-
-      // await this.userRepository.delete({ userId: id });
+      await this.userRepository.delete({ userId: id });
 
       return "Delete User Success";
    }

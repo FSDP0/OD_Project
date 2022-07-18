@@ -1,4 +1,5 @@
 import { DataSource } from "typeorm";
+
 import { User } from "../../users/entity/user.entity";
 
 export const databaseProviders = [
@@ -13,7 +14,8 @@ export const databaseProviders = [
             password: process.env.DATABASE_PASSWORD,
             database: process.env.DATABASE_NAME,
             entities: [User],
-            synchronize: true,
+            synchronize: process.env.NODE_ENV == "development" ? true : false,
+            logging: process.env.NODE_ENV == "development" ? true : false,
          });
 
          return dataSource.initialize();

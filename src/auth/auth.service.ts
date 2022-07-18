@@ -52,13 +52,13 @@ export class AuthService {
    async loginUser(
       dto: LoginUserDto,
    ): Promise<{ access_token: string } | undefined> {
-      const user: UserDto = await this.usersService.findByFields({
+      const userFind: UserDto = await this.usersService.findByFields({
          where: { userId: dto.userId },
       });
 
       const payload: Token_Payload = {
-         userId: user.userId,
-         userName: user.userName,
+         userId: userFind.userId,
+         userName: userFind.userName,
       };
 
       return { access_token: this.jwtService.sign(payload) };
