@@ -1,12 +1,13 @@
 import {
    Get,
    Post,
+   Patch,
    Delete,
    Req,
    Body,
    Controller,
    UseGuards,
-   Logger,
+   // Logger,
 } from "@nestjs/common";
 // import { ConfigService } from "@nestjs/config";
 
@@ -18,7 +19,11 @@ import { JwtAuthGuard } from "./guard/jwt-auth.guard";
 import { AuthService } from "./auth.service";
 // import { UsersService } from "../users/users.service";
 
-import { CreateUserDto, LoginUserDto } from "../users/dto/user.dto";
+import {
+   CreateUserDto,
+   LoginUserDto,
+   UpdateUserDto,
+} from "../users/dto/user.dto";
 
 @Controller("auth")
 export class AuthController {
@@ -43,8 +48,14 @@ export class AuthController {
       return await this.authService.loginUser(dto);
    }
 
-   @Post("Update")
-   async UpdateUser(@Req() req: Request) {}
+   @UseGuards(JwtAuthGuard)
+   @Patch("Update")
+   async UpdateUser(
+      @Req() req: Request,
+      @Body() dto: UpdateUserDto,
+   ): Promise<any> {
+      return await this.authService.updateUser(dto);
+   }
 
    @UseGuards(JwtAuthGuard)
    @Delete("Delete")

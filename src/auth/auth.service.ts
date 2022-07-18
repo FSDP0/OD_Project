@@ -64,7 +64,7 @@ export class AuthService {
       return { access_token: this.jwtService.sign(payload) };
    }
 
-   async modifyUser(dto: UpdateUserDto): Promise<UserDto | String> {
+   async updateUser(dto: UpdateUserDto): Promise<String | undefined> {
       let userFind_with_Email: UserDto = await this.usersService.findByFields({
          where: { userEmail: dto.userEmail },
       });
@@ -73,7 +73,7 @@ export class AuthService {
          return "User Not Exist";
       }
 
-      return;
+      return this.usersService.updateUser(dto);
    }
 
    async deleteUser(id: string): Promise<String | undefined> {
