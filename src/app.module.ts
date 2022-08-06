@@ -3,6 +3,8 @@ import { ConfigModule } from "@nestjs/config";
 
 // import { AppService } from "./app.service";
 import * as Joi from "joi";
+import * as path from "path";
+import { FcmModule } from "nestjs-fcm";
 
 import { LoggerMiddleware } from "./common/middleware/logger.middleware";
 
@@ -10,11 +12,15 @@ import { AuthModule } from "./auth/auth.module";
 import { UsersModule } from "./users/users.module";
 
 import { DatabaseModule } from "./config/database/database.module";
+import { DeviceModule } from "./device/device.module";
 
 @Module({
    imports: [
       AuthModule,
       UsersModule,
+      FcmModule.forRoot({
+         firebaseSpecsPath: path.resolve("./firebase.spec.json"),
+      }),
       DatabaseModule,
       ConfigModule.forRoot({
          isGlobal: true,
@@ -34,6 +40,7 @@ import { DatabaseModule } from "./config/database/database.module";
             DATABASE_NAME: Joi.string().required(),
          }),
       }),
+      DeviceModule,
    ],
    // providers: [AppService],
 })

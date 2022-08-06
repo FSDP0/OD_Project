@@ -36,13 +36,13 @@ $ npm install
 
 ```bash
 # development
-$ npm run start
-
-# watch mode
 $ npm run start:dev
 
+# watch mode
+# $ npm run start:dev
+
 # production mode
-$ npm run start:prod
+# $ npm run start:prod
 ```
 
 ## Test
@@ -64,9 +64,9 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+-  Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+-  Website - [https://nestjs.com](https://nestjs.com/)
+-  Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 

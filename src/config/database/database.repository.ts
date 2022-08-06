@@ -15,7 +15,7 @@ export const databaseProviders = [
             database: process.env.DATABASE_NAME,
             entities: [User],
             synchronize: process.env.NODE_ENV == "development" ? true : false,
-            logging: process.env.NODE_ENV == "development" ? true : false,
+            // logging: process.env.NODE_ENV == "development" ? true : false,
          });
 
          return dataSource.initialize();

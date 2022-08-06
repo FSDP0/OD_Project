@@ -4,6 +4,7 @@ import {
    Patch,
    Delete,
    Req,
+   Res,
    Body,
    Controller,
    UseGuards,
@@ -11,7 +12,7 @@ import {
 } from "@nestjs/common";
 // import { ConfigService } from "@nestjs/config";
 
-import { Request } from "express";
+import { Request, Response } from "express";
 
 import { LocalAuthGuard } from "./guard/local-auth.guard";
 import { JwtAuthGuard } from "./guard/jwt-auth.guard";
@@ -43,9 +44,21 @@ export class AuthController {
    @Post("Login")
    async loginUser(
       @Req() req: Request,
+      // @Res() res: Response,
       @Body() dto: LoginUserDto,
    ): Promise<any> {
-      return await this.authService.loginUser(dto);
+      // const jwt = await this.authService.loginUser(dto);
+
+      // res.setHeader("Authorization", "Bearer " + jwt.access_token);
+
+      // res.cookie("jwt", jwt.access_token, {
+      //    httpOnly: true,
+      //    maxAge: 24 * 60 * 60 * 1000, // 1 Day
+      // });
+
+      // return res.send({ message: "Login Success" });
+
+      return this.authService.loginUser(dto);
    }
 
    @UseGuards(JwtAuthGuard)

@@ -31,19 +31,4 @@ export class User {
       comment: "사용자 계정정보 수정일",
    })
    modDate?: Date;
-
-   // @Column({
-   //    type: "date",
-   //    nullable: true,
-   //    default: null,
-   //    comment: "사용자 계정정보 삭제일",
-   // })
-   // delDate?: Date;
-
-   // @Column({
-   //    type: "boolean",
-   //    default: true,
-   //    comment: "사용자 계정 활성화 상태",
-   // })
-   // isActive: boolean;
 }

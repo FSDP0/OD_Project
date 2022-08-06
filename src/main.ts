@@ -5,6 +5,7 @@ import { ConfigService } from "@nestjs/config";
 import * as dotenv from "dotenv";
 import * as path from "path";
 import helmet from "helmet";
+import * as cookieParser from "cookie-parser";
 
 import { AppModule } from "./app.module";
 
@@ -22,13 +23,15 @@ async function bootstrap() {
 
    const port = configService.get<number>("SERVER_PORT");
 
-   app.use(helmet()).useGlobalPipes(
-      new ValidationPipe({
-         transform: true,
-         forbidNonWhitelisted: true, // DTO에 정의되어 있지 않는 Property를 body를 통해 전송 시, Error
-         whitelist: true,
-      }),
-   );
+   app.use(helmet())
+      .use(cookieParser())
+      .useGlobalPipes(
+         new ValidationPipe({
+            transform: true,
+            forbidNonWhitelisted: true, // DTO에 정의되어 있지 않는 Property를 body를 통해 전송 시, Error
+            whitelist: true,
+         }),
+      );
 
    await app.listen(port);
 
