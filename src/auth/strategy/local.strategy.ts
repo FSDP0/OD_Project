@@ -11,6 +11,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
       super({ usernameField: "userId", passwordField: "userPassword" });
    }
 
+   // @override
    async validate(userId: string, userPassword: string): Promise<any> {
       const user = await this.authService.validateUser(userId, userPassword);
 

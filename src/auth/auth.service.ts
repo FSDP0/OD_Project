@@ -11,6 +11,7 @@ import {
    LoginUserDto,
    UpdateUserDto,
 } from "../users/dto/user.dto";
+
 import { UsersService } from "../users/users.service";
 
 @Injectable()
@@ -64,28 +65,28 @@ export class AuthService {
       return { access_token: this.jwtService.sign(payload) };
    }
 
-   async updateUser(dto: UpdateUserDto): Promise<String | undefined> {
+   async updateUser(dto: UpdateUserDto) {
       let userFind_with_Email: UserDto = await this.usersService.findByFields({
          where: { userEmail: dto.userEmail },
       });
 
       if (!userFind_with_Email) {
-         return "User Not Exist";
+         throw new HttpException("User Not Exist", HttpStatus.BAD_REQUEST);
       }
 
-      return this.usersService.updateUser(dto);
+      await this.usersService.updateUser(dto);
    }
 
-   async deleteUser(id: string): Promise<String | undefined> {
+   async deleteUser(id: string) {
       let userFind = await this.usersService.findByFields({
          where: { userId: id },
       });
 
       if (!userFind) {
-         return "User Not Exist";
+         throw new HttpException("User Not Exist", HttpStatus.BAD_REQUEST);
       }
 
-      return this.usersService.deleteUser(id);
+      await this.usersService.deleteUser(id);
    }
 
    async validateUser(Id: string, Password: string): Promise<any> {

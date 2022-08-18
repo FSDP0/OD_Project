@@ -17,7 +17,7 @@ export class DeviceController {
    async sendData(): Promise<any> {
       this.deviceService.doStuff();
 
-      return "Test Progress";
+      return "Send Message Success !";
       // let target_token =
       //    "cIr_-RYrR12AsOG2euz3aG:APA91bGkRhrOcc93OW4tKC0hzqUowUUdvgl2FVOd6iU5doVDcEJfd9TmCTkSgm1eogzUVcqL7vJ9MsEbcYOoVjQCnjldoRTW68J2l_SCI0pGs4y6d2nf1ICEXACGOfDOr_iFEN6AXzw-";
       // let message = {

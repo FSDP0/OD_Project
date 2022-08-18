@@ -25,7 +25,7 @@ import { UserRepository } from "../users/repo/user.repository";
          imports: [ConfigModule],
          useFactory: async (configService: ConfigService) => ({
             secret: configService.get<string>("SECRET_KEY"),
-            signOptions: { expiresIn: "60s" },
+            signOptions: { expiresIn: "1d" },
          }),
          inject: [ConfigService],
       }),
