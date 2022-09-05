@@ -1,6 +1,8 @@
 import { DataSource } from "typeorm";
 
 import { User } from "../../users/entity/user.entity";
+// import { UserToken } from "@root/users/entity/userToken.entity";
+// import { UserRole } from "@root/users/entity/userRole.entity";
 
 export const databaseProviders = [
    {
@@ -13,7 +15,11 @@ export const databaseProviders = [
             username: process.env.DATABASE_USERNAME,
             password: process.env.DATABASE_PASSWORD,
             database: process.env.DATABASE_NAME,
-            entities: [User],
+            entities: [
+               User,
+               // UserToken,
+               // UserRole
+            ],
             synchronize: process.env.NODE_ENV == "development" ? true : false,
             // logging: process.env.NODE_ENV == "development" ? true : false,
          });

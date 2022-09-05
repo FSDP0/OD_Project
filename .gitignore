@@ -41,3 +41,5 @@ firebase.spec.json
 
 prettierrc
 .gitignore
+.dockerfile
+.dockerignore

@@ -8,9 +8,15 @@ export class FirebaseService {
 
    async sendNotification() {
       await this.fcmService.sendNotification(
-         [],
+         [
+            // Device Token Here
+         ],
          {
+            notification: {
+               // Notification Data Here
+            },
             data: {
+               // Body Data Here
                title: "Example Title",
                body: "Example Body",
             },

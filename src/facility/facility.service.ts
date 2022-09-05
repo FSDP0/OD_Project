@@ -1,8 +1,10 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { Inject, Injectable, HttpException, HttpStatus } from "@nestjs/common";
 
 import { FindOneOptions, Repository } from "typeorm";
 
-import { Facility } from "./entity/facility.entity";
+import { FacilityDto } from "@facility/dto/facility.dto";
+import { Facility } from "@facility/entity/facility.entity";
+import {} from "@facility/repo/facility.repository";
 
 @Injectable()
 export class FacilityService {
@@ -11,10 +13,17 @@ export class FacilityService {
       private facilityRepository: Repository<Facility>,
    ) {}
 
-   async findByFields(): // options:FindOneOptions<>
-   Promise<undefined> {
-      // return await this.facilityRepository.findOne();
-
-      return null;
+   async findByFields(
+      options: FindOneOptions<FacilityDto>,
+   ): Promise<FacilityDto | undefined> {
+      try {
+         return await this.facilityRepository.findOne(options);
+      } catch {
+         throw new HttpException(
+            "Facility Not Found Error",
+            HttpStatus.NOT_FOUND,
+         );
+      }
    }
 }
+//

@@ -7,7 +7,7 @@ export class LoggerMiddleware implements NestMiddleware {
       console.log(
          "\n\nRequest ...",
          "\n \\... Request Header :",
-         req.headers,
+         // req.headers,
          "\n \\... Request Body :",
          req.body,
       );

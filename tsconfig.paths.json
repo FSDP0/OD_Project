@@ -11,8 +11,20 @@
             "@user/*": [
                 "./src/users/*"
             ],
+            "@facility/*": [
+                "./src/facility/*"
+            ],
+            "@device/*": [
+                "./src/device/*"
+            ],
+            "@firebase/*": [
+                "./src/firebase/*"
+            ],
             "@dbConfig/*": [
                 "./src/config/database/*"
+            ],
+            "@common/*": [
+                "./src/common/*"
             ],
             "@middleware/*": [
                 "./src/common/middleware/*"
